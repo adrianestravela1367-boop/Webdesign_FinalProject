@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>PhilFauna | Encyclopedia of Endemic Philippine Animals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a1f0e;
+            font-family: 'Inter', sans-serif;
+            color: #e8e2d4;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e3a2a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5d8c6b;
+            border-radius: 10px;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-bottom: 4px solid #d4a373;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.45) saturate(1.2);
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, #0a1f0e, transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Three Habitats Logo */
+        .logo-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .habitat-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: rgba(20, 40, 25, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 0.8rem 2rem;
+            border-radius: 80px;
+            border: 1px solid rgba(212, 163, 115, 0.6);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+        }
+        
+        .habitat-logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+            border-color: #d4a373;
+        }
+        
+        .habitat-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .habitat-icon i {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: transform 0.2s ease;
+        }
+        
+        .habitat-icon span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #d4a373;
+        }
+        
+        .icon-land { color: #7cb083; }
+        .icon-water { color: #5f9ea0; }
+        .icon-air { color: #e6c89c; }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.6);
+            background: linear-gradient(135deg, #f3e7c9, #d4a373, #f3e7c9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 1rem auto;
+            opacity: 0.95;
+            font-weight: 300;
+            color: #f0e8d8;
+            line-height: 1.6;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-left: 2px solid #d4a373;
+            color: #f0e8d8;
+        }
+        
+        .cta-scroll {
+            margin-top: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .cta-scroll a {
+            color: #d4a373;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.5);
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            transition: 0.3s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        
+        /* Main Layout: Sidebar + Content */
+        .main-layout {
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Notebook / Journal Sidebar */
+        .journal-sidebar {
+            flex: 0 0 320px;
+            background: #1e3325;
+            border-radius: 1.8rem;
+            border: 1px solid #3a6a4a;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: sticky;
+            top: 1rem;
+            align-self: flex-start;
+            backdrop-filter: blur(4px);
+        }
+        
+        .journal-header {
+            background: #2a4634;
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 2px solid #d4a373;
+        }
+        
+        .journal-header i {
+            font-size: 2rem;
+            color: #d4a373;
+            margin-bottom: 0.5rem;
+        }
+        
+        .journal-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #f3e7c9;
+        }
+        
+        .journal-header p {
+            font-size: 0.8rem;
+            color: #b8aa8a;
+            margin-top: 0.3rem;
+        }
+        
+        .journal-form {
+            padding: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d4a373;
+            margin-bottom: 0.4rem;
+        }
+        
+        .form-group select, .form-group textarea, .form-group input {
+            width: 100%;
+            background: #0e2a1a;
+            border: 1px solid #3a6a4a;
+            border-radius: 12px;
+            padding: 0.7rem;
+            color: #e8e2d4;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .form-group select:focus, .form-group textarea:focus, .form-group input:focus {
+            outline: none;
+            border-color: #d4a373;
+            box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.3);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            background: #d4a373;
+            color: #1a3a2a;
+            border: none;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .submit-btn:hover {
+            background: #e6c89c;
+            transform: translateY(-2px);
+        }
+        
+        .entries-list {
+            margin-top: 1rem;
+            border-top: 1px solid #3a6a4a;
+            padding-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .entry-item {
+            background: #0e2a1a;
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #d4a373;
+        }
+        
+        .entry-animal {
+            font-weight: 700;
+            color: #ffdfaa;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .entry-date {
+            font-size: 0.7rem;
+            color: #9aba8a;
+            margin: 0.3rem 0;
+        }
+        
+        .entry-text {
+            font-size: 0.8rem;
+            color: #cfc9b8;
+            line-height: 1.4;
+        }
+        
+        .delete-entry {
+            background: none;
+            border: none;
+            color: #c33c2e;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+        
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .info-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            background: #1e3a2a;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid #3a6a4a;
+        }
+        
+        .status-legend {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .legend-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e8e2d4;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot.critical { background: #c33c2e; }
+        .dot.endangered { background: #e68a2e; }
+        .dot.vulnerable { background: #e6c12e; }
+        .dot.stable { background: #2c8c5a; }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #5d8c6b;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            color: #e8e2d4;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #d4a373;
+            border-color: #d4a373;
+            color: #1a3a2a;
+            font-weight: 600;
+        }
+
+        .animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .animal-card {
+            background: #1f3324;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            border: 1px solid #3a6a4a;
+        }
+        .animal-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.5);
+            border-color: #d4a373;
+        }
+        .img-wrapper {
+            background: #0e2a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            min-height: 230px;
+            border-bottom: 2px solid #3a6a4a;
+        }
+        .img-wrapper img {
+            display: block;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            max-height: 180px;
+            object-fit: contain;
+            transition: transform 0.4s;
+        }
+        .card-content {
+            padding: 1.2rem;
+        }
+        .animal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f3e7c9;
+        }
+        .scientific {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: #b8aa8a;
+            margin-bottom: 0.5rem;
+        }
+        .info-text {
+            font-size: 0.85rem;
+            color: #cfc9b8;
+            margin: 0.5rem 0;
+        }
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            background: #2a4a34;
+            padding: 0.3rem 0.7rem;
+            border-radius: 30px;
+            width: fit-content;
+            margin: 0.5rem 0;
+        }
+        .status-badge {
+            margin-top: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+        }
+        .crit { background: #5a2a22; color: #ffaa99; }
+        .end { background: #5a3e22; color: #ffcd94; }
+        .vul { background: #4a5222; color: #ffea99; }
+        .stable { background: #2a523a; color: #b8e6cc; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.92);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1e3325;
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+            border-radius: 2rem;
+            overflow-y: auto;
+            border: 1px solid #d4a373;
+        }
+        .modal-header {
+            position: relative;
+            background: #0e2a1a;
+            display: flex;
+            justify-content: center;
+            padding: 1.2rem;
+            border-bottom: 2px solid #3a6a4a;
+        }
+        .modal-header img {
+            max-width: 100%;
+            max-height: 40vh;
+            object-fit: contain;
+            border-radius: 1rem;
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: rgba(0,0,0,0.6);
+            color: #d4a373;
+            border: 1px solid #d4a373;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .modal-body { padding: 1.5rem; }
+        .detail-section {
+            margin: 1rem 0;
+            background: #2a4634;
+            padding: 0.8rem;
+            border-radius: 1rem;
+        }
+        .report-sighting {
+            margin: 1rem 0;
+            background: #3a5a44;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            border-left: 4px solid #d4a373;
+            cursor: pointer;
+        }
+        
+        .more-animals {
+            text-align: center;
+            margin: 3rem auto 1rem;
+            padding: 2rem;
+            background: #1a3a2a;
+            border-radius: 2rem;
+            border: 1px dashed #d4a373;
+        }
+        
+        footer {
+            background: #051a0c;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-top: 2px solid #d4a373;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .journal-sidebar { position: static; flex: auto; }
+            .hero h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <img class="hero-bg" src="RainForest.jpg" alt="Philippine Rainforest" onerror="this.style.display='none'">
+    <div class="hero-content">
+        <div class="logo-container">
+            <div class="habitat-logo">
+                <div class="habitat-icon"><i class="fas fa-mountain icon-land"></i><span>LAND</span></div>
+                <div class="habitat-icon"><i class="fas fa-water icon-water"></i><span>WATER</span></div>
+                <div class="habitat-icon"><i class="fas fa-feather-alt icon-air"></i><span>AIR</span></div>
+            </div>
+        </div>
+        <h1>PhilFauna</h1>
+        <p>Discover the extraordinary wildlife that calls the Philippine rainforests home — endemic, unique, and irreplaceable.</p>
+        <div class="hero-stats">
+            <span class="stat-item"><i class="fas fa-island-tropical"></i> 7,641 Islands</span>
+            <span class="stat-item"><i class="fas fa-paw"></i> 200+ Endemic Species</span>
+            <span class="stat-item"><i class="fas fa-leaf"></i> Share Your Encounters</span>
+        </div>
+        <div class="cta-scroll"><a href="#explore"><i class="fas fa-arrow-down"></i> Explore</a></div>
+    </div>
+</div>
+
+<div class="main-layout">
+    <!-- Left Side: Notebook / Journal -->
+    <div class="journal-sidebar">
+        <div class="journal-header">
+            <i class="fas fa-book-open"></i>
+            <h3>Wildlife Journal</h3>
+            <p>Record your animal encounters</p>
+        </div>
+        <div class="journal-form">
+            <div class="form-group">
+                <label><i class="fas fa-paw"></i> Animal Species</label>
+                <select id="animalSelect">
+                    <option value="">-- Select an animal --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> Date of Sighting</label>
+                <input type="date" id="sightingDate">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Location (optional)</label>
+                <input type="text" id="sightingLocation" placeholder="e.g., Mount Apo, Davao">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-comment-dots"></i> Your Experience</label>
+                <textarea id="sightingExperience" placeholder="Describe your encounter: How did the animal behave? Was it friendly, shy, aggressive? Any special observations?"></textarea>
+            </div>
+            <button class="submit-btn" id="submitEntryBtn"><i class="fas fa-save"></i> Save Sighting</button>
+            
+            <div class="entries-list">
+                <div style="font-size:0.75rem; color:#9aba8a; margin-bottom:0.5rem;"><i class="fas fa-history"></i> Your Past Notes</div>
+                <div id="entriesContainer"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Content Area -->
+    <div class="content-area" id="explore">
+        <div class="info-bar">
+            <div class="status-legend">
+                <span class="legend-dot"><span class="dot critical"></span> Critically endangered</span>
+                <span class="legend-dot"><span class="dot endangered"></span> Endangered</span>
+                <span class="legend-dot"><span class="dot vulnerable"></span> Vulnerable</span>
+                <span class="legend-dot"><span class="dot stable"></span> Stable</span>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="critically endangered">Critical</button>
+                <button class="filter-btn" data-filter="endangered">Endangered</button>
+                <button class="filter-btn" data-filter="vulnerable">Vulnerable</button>
+            </div>
+        </div>
+        <div class="animals-grid" id="animalsGrid"></div>
+        <div class="more-animals">
+            <i class="fas fa-binoculars"></i>
+            <h3>More Animals Coming Soon</h3>
+            <p>We are continuously documenting the incredible biodiversity of the Philippines.</p>
+            <div class="coming-soon-badge" style="display:inline-block; background:#d4a373; color:#1a3a2a; padding:0.4rem 1rem; border-radius:40px; margin-top:0.8rem;"><i class="fas fa-clock"></i> 15+ species in research</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-tree"></i> Deep in the Philippine rainforest, every species tells a story. Protect what remains.
+</footer>
+
+<div id="animalModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header"><img id="modalImg" src=""><button class="close-modal" id="closeModalBtn">&times;</button></div>
+        <div class="modal-body">
+            <h2 id="modalName"></h2>
+            <div class="modal-scientific" id="modalScientific"></div>
+            <div class="detail-section"><h3><i class="fas fa-tree"></i> Habitat</h3><p id="modalHabitat"></p></div>
+            <div class="detail-section"><h3><i class="fas fa-utensils"></i> Diet</h3><p id="modalDiet"></p></div>
+            <div class="detail-section"><h3><i class="fas fa-paw"></i> Behavior</h3><p id="modalBehavior"></p></div>
+            <div class="report-sighting" id="modalReportBtn"><i class="fas fa-camera"></i> Report a Sighting — Help conservation efforts</div>
+            <div class="info-row" style="display:flex; gap:0.8rem; margin-top:1rem;"><span class="info-chip" id="modalStatusChip"></span><span class="info-chip" id="modalLocationChip"></span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Animal Data (20 species)
+    const animalsData = [
+        { name: "Philippine Eagle", scientific: "Pithecophaga jefferyi", description: "One of the largest eagles in the world.", location: "Luzon, Samar, Leyte, Mindanao", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Eagle.jpg", habitatDetail: "Dense old-growth tropical rainforests.", diet: "Macaques, flying lemurs, civets.", behavior: "Monogamous, apex predator." },
+        { name: "Philippine Tamaraw", scientific: "Bubalus mindorensis", description: "A small wild buffalo endemic to Mindoro.", location: "Mounts Iglit–Baco, Mindoro", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Tamaraw.jpg", habitatDetail: "Grasslands, secondary forests.", diet: "Grasses, bamboo shoots.", behavior: "Solitary, territorial." },
+        { name: "Philippine Tarsier", scientific: "Carlito syrichta", description: "Tiny primate with enormous eyes.", location: "Bohol, Samar, Leyte", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Tarsier.jpg", habitatDetail: "Secondary forests, bamboo thickets.", diet: "Insects, small lizards.", behavior: "Nocturnal, agile jumper." },
+        { name: "Philippine Crocodile", scientific: "Crocodylus mindorensis", description: "Freshwater crocodile.", location: "Sierra Madre, Mindanao", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Crocodile.jpg", habitatDetail: "Freshwater lakes, marshes.", diet: "Fish, snails, crustaceans.", behavior: "Shy, non-aggressive." },
+        { name: "Philippine Spotted Deer", scientific: "Rusa alfredi", description: "Small deer with cream spots.", location: "Panay, Negros", status: "endangered", statusLabel: "Endangered", image: "Philippine Spotted Deer.jpg", habitatDetail: "Lowland rainforest fragments.", diet: "Leaves, fallen fruits.", behavior: "Nocturnal, secretive." },
+        { name: "Philippine Peacock Pheasant", scientific: "Polyplectron napoleonis", description: "Iridescent bird endemic to Palawan.", location: "Palawan", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Peacock Pheasant.jpg", habitatDetail: "Humid lowland forests.", diet: "Insects, berries, seeds.", behavior: "Elaborate courtship display." },
+        { name: "Philippine Flying Lemur", scientific: "Cynocephalus volans", description: "Gliding mammal (colugo).", location: "Mindanao, Basilan, Samar", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Flying Lemur.jpg", habitatDetail: "Rainforests, plantations.", diet: "Leaves, flowers, fruits.", behavior: "Glides up to 100m." },
+        { name: "Philippine Heart Pigeon", scientific: "Gallicolumba keayi", description: "Ground pigeon with red breast patch.", location: "Negros, Panay", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Heart Pigeon.jpg", habitatDetail: "Lowland forests.", diet: "Seeds, berries, snails.", behavior: "Terrestrial, secretive." },
+        { name: "Philippine Monitor Lizard", scientific: "Varanus salvator", description: "Large monitor lizard.", location: "Throughout Philippines", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Monitor Lizard.jpg", habitatDetail: "Rivers, mangroves, forests.", diet: "Fish, frogs, carrion.", behavior: "Excellent swimmer." },
+        { name: "Philippine Warty Pig", scientific: "Sus philippensis", description: "Wild pig with facial warts.", location: "Luzon, Mindoro, Samar", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Warty Pig.jpg", habitatDetail: "Forests lowland to montane.", diet: "Roots, fruits, insects.", behavior: "Gregarious, active dawn/dusk." },
+        { name: "Philippine Lorikeet", scientific: "Saudareos johnstoniae", description: "Vibrant green and red parrot.", location: "Mount Apo, Kitanglad", status: "endangered", statusLabel: "Endangered", image: "Philippine Lorikeet.jpg", habitatDetail: "Montane mossy forests.", diet: "Nectar, pollen, fruits.", behavior: "Acrobatic flyers." },
+        { name: "Philippine Duck", scientific: "Anas luzonica", description: "Dabbling duck with cinnamon head.", location: "Luzon, Mindanao, Mindoro", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Duck.jpg", habitatDetail: "Wetlands, rice paddies.", diet: "Aquatic plants, insects.", behavior: "Pairs or small flocks." },
+        { name: "Philippine Cockatoo", scientific: "Cacatua haematuropygia", description: "White cockatoo with red undertail.", location: "Palawan", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Cockatoo.jpg", habitatDetail: "Mangroves, lowland forests.", diet: "Seeds, fruits, nuts.", behavior: "Social, loud calls." },
+        { name: "Philippine Forest Turtle", scientific: "Siebenrockiella leytensis", description: "Freshwater turtle with yellow head.", location: "Palawan", status: "critically endangered", statusLabel: "Critically Endangered", image: "Philippine Forest Turtle.jpg", habitatDetail: "Clear streams, lowland forests.", diet: "Aquatic plants, insects.", behavior: "Secretive, aquatic." },
+        { name: "Philippine Eagle-Owl", scientific: "Bubo philippensis", description: "Large owl with ear tufts.", location: "Luzon, Samar, Mindanao", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Eagle-Owl.jpg", habitatDetail: "Lowland forests.", diet: "Rodents, small birds.", behavior: "Nocturnal, deep calls." },
+        { name: "Philippine Brown Deer", scientific: "Rusa marianna", description: "Medium-sized deer.", location: "Luzon, Mindanao, Leyte", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Brown Deer.jpg", habitatDetail: "Forests lowland to montane.", diet: "Leaves, grasses, fruits.", behavior: "Crepuscular." },
+        { name: "Philippine Frogmouth", scientific: "Batrachostomus septimus", description: "Master of camouflage.", location: "Luzon, Mindanao, Samar", status: "least concern", statusLabel: "Stable", image: "Philippine Frogmouth.jpg", habitatDetail: "Lowland forests.", diet: "Insects, moths.", behavior: "Sits motionless." },
+        { name: "Philippine Sailfin Lizard", scientific: "Hydrosaurus pustulatus", description: "Lizard with sail-like fin.", location: "Luzon, Mindanao", status: "vulnerable", statusLabel: "Vulnerable", image: "Philippine Sailfin Lizard.jpg", habitatDetail: "Rivers, mangroves.", diet: "Leaves, fruits, insects.", behavior: "Semi-aquatic." },
+        { name: "Visayan Hornbill", scientific: "Penelopides panini", description: "Small hornbill with casque.", location: "Panay, Negros", status: "endangered", statusLabel: "Endangered", image: "Visayan Hornbill.jpg", habitatDetail: "Lowland forests.", diet: "Fruits, insects.", behavior: "Nests in tree cavities." },
+        { name: "Mindanao Pygmy Goby", scientific: "Pandaka pygmaea", description: "One of smallest fish.", location: "Mindanao", status: "critically endangered", statusLabel: "Critically Endangered", image: "Mindanao Pygmy Goby.jpg", habitatDetail: "Freshwater rivers.", diet: "Plankton, algae.", behavior: "Transparent body." }
+    ];
+
+    const FALLBACK_IMG = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Philippine_nature.jpg/640px-Philippine_nature.jpg";
+    
+    // Populate animal dropdown
+    function populateDropdown() {
+        const select = document.getElementById('animalSelect');
+        animalsData.sort((a,b) => a.name.localeCompare(b.name)).forEach(animal => {
+            const option = document.createElement('option');
+            option.value = animal.name;
+            option.textContent = animal.name;
+            select.appendChild(option);
+        });
+    }
+    
+    // Journal entries storage
+    let journalEntries = JSON.parse(localStorage.getItem('philfauna_journal') || '[]');
+    
+    function saveEntries() {
+        localStorage.setItem('philfauna_journal', JSON.stringify(journalEntries));
+        renderEntries();
+    }
+    
+    function renderEntries() {
+        const container = document.getElementById('entriesContainer');
+        if (!container) return;
+        if (journalEntries.length === 0) {
+            container.innerHTML = '<div style="color:#9aba8a; text-align:center; padding:1rem;"><i class="fas fa-pen"></i> No entries yet. Share your experience!</div>';
+            return;
+        }
+        container.innerHTML = journalEntries.slice().reverse().map((entry, idx) => `
+            <div class="entry-item">
+                <div class="entry-animal"><i class="fas fa-paw"></i> ${entry.animal}</div>
+                <div class="entry-date"><i class="far fa-calendar-alt"></i> ${entry.date || 'Date not set'}</div>
+                <div class="entry-text"><i class="fas fa-map-marker-alt"></i> ${entry.location || 'Location not specified'}</div>
+                <div class="entry-text">${entry.experience.substring(0, 80)}${entry.experience.length > 80 ? '...' : ''}</div>
+                <button class="delete-entry" data-index="${journalEntries.length - 1 - idx}"><i class="fas fa-trash-alt"></i> Remove</button>
+            </div>
+        `).join('');
+        document.querySelectorAll('.delete-entry').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.index);
+                journalEntries.splice(idx, 1);
+                saveEntries();
+            });
+        });
+    }
+    
+    document.getElementById('submitEntryBtn')?.addEventListener('click', () => {
+        const animal = document.getElementById('animalSelect').value;
+        const date = document.getElementById('sightingDate').value;
+        const location = document.getElementById('sightingLocation').value;
+        const experience = document.getElementById('sightingExperience').value.trim();
+        if (!animal) { alert('Please select an animal species'); return; }
+        if (!experience) { alert('Please share your experience'); return; }
+        journalEntries.push({
+            animal: animal,
+            date: date || new Date().toLocaleDateString(),
+            location: location || 'Unknown',
+            experience: experience,
+            timestamp: Date.now()
+        });
+        saveEntries();
+        document.getElementById('sightingExperience').value = '';
+        document.getElementById('sightingLocation').value = '';
+        document.getElementById('sightingDate').value = '';
+        alert('✓ Sighting recorded! Thank you for contributing to wildlife awareness.');
+    });
+    
+    // Render cards
+    function getStatusClass(s) {
+        if (s === "critically endangered") return "crit";
+        if (s === "endangered") return "end";
+        if (s === "vulnerable") return "vul";
+        return "stable";
+    }
+    function renderCards(filter = "all") {
+        const grid = document.getElementById("animalsGrid");
+        let filtered = filter === "all" ? [...animalsData] : animalsData.filter(a => a.status === filter);
+        if (filtered.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem;">No animals match.</div>`; return; }
+        grid.innerHTML = filtered.map(animal => `
+            <div class="animal-card">
+                <div class="img-wrapper"><img src="${animal.image}" alt="${animal.name}" onerror="this.src='${FALLBACK_IMG}'"></div>
+                <div class="card-content">
+                    <div class="animal-name">${animal.name}</div>
+                    <div class="scientific">${animal.scientific}</div>
+                    <div class="info-text">${animal.description.substring(0, 80)}...</div>
+                    <div class="location"><i class="fas fa-map-pin"></i> ${animal.location}</div>
+                    <div class="status-badge ${getStatusClass(animal.status)}"><i class="fas ${animal.status === 'critically endangered' ? 'fa-skull' : (animal.status === 'endangered' ? 'fa-exclamation-triangle' : 'fa-chart-line')}"></i> ${animal.statusLabel}</div>
+                </div>
+            </div>
+        `).join('');
+        document.querySelectorAll('.animal-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const name = card.querySelector('.animal-name').innerText;
+                const animal = animalsData.find(a => a.name === name);
+                if (animal) openModal(animal);
+            });
+        });
+    }
+    
+    let currentModalAnimal = null;
+    function openModal(animal) {
+        currentModalAnimal = animal;
+        document.getElementById('modalImg').src = animal.image;
+        document.getElementById('modalName').innerText = animal.name;
+        document.getElementById('modalScientific').innerHTML = `<i class="fas fa-tag"></i> ${animal.scientific}`;
+        document.getElementById('modalHabitat').innerHTML = `${animal.habitatDetail}<br><strong>Range:</strong> ${animal.location}`;
+        document.getElementById('modalDiet').innerHTML = animal.diet;
+        document.getElementById('modalBehavior').innerHTML = animal.behavior;
+        document.getElementById('modalStatusChip').innerHTML = `<i class="fas fa-heartbeat"></i> Status: ${animal.statusLabel}`;
+        document.getElementById('modalLocationChip').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${animal.location}`;
+        document.getElementById('animalModal').classList.add('active');
+    }
+    function closeModal() { document.getElementById('animalModal').classList.remove('active'); }
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    document.getElementById('animalModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('animalModal')) closeModal(); });
+    document.getElementById('modalReportBtn')?.addEventListener('click', () => {
+        if (currentModalAnimal) {
+            alert(`📝 Report Sighting: ${currentModalAnimal.name}\n\nThank you for helping protect Philippine wildlife! Your report helps conservation efforts. Consider logging this in the Wildlife Journal on the left.`);
+        } else { alert("Share your wildlife encounters using the journal on the left!"); }
+    });
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            renderCards(this.dataset.filter);
+        });
+    });
+    
+    populateDropdown();
+    renderEntries();
+    renderCards("all");
+</script>
+</body>
+</html>
